@@ -4,6 +4,8 @@
 
 [DeepL API](https://www.deepl.com/docs-api/introduction/) での翻訳にも対応しています.
 
+![image](https://user-images.githubusercontent.com/1632335/88476721-ae437080-cf75-11ea-8518-f60d164cc034.png)
+
 ここでは, まずローカル環境でテストして, その後, 本番環境として [Heroku](https://www.heroku.com/) で ResearchBot をホスティングする方法を説明します.
 
 
@@ -258,7 +260,7 @@ python run.py
 ngrok http 3000
 # Slack App の設定で Features > Event Subscriptions, Enable Events > Request URL を ngrok の URL に変更
 # Slack で動作確認
-# Heroku にアップロード
+# ローカルでテストが済んだら以下のように Heroku にデプロイ
 git add
 git commit
 git push heroku master # Heroku にアップロードされてコードが更新
