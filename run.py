@@ -63,9 +63,8 @@ def translate_text(text, target_lang='JA'): # drop user_id to increase cache hit
     deepl_auth_key = get_deepl_auth_key(user_id)
     if deepl_auth_key:
         return translate_deepl_api(text, deepl_auth_key, target_lang=target_lang)
-    # else:
-    #     return translator.translate_another_api(text, target_lang=target_lang)
     else:
+        # return translator.translate_another_api(text, target_lang=target_lang)
         return None
 
 def translate_deepl_api(text, auth_key, target_lang='JA'):

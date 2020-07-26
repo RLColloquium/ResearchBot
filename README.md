@@ -234,7 +234,7 @@ Slack App の画面に戻って, 左のメニューから,
 
 Features > Event Subscriptions
 
-Enable Events > Request URL
+Enable Events > Request URL > Change
 
 Heroku のアドレスの末尾に `/slack/events` を追加して入力します.
 
