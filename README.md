@@ -19,9 +19,10 @@ https://api.slack.com/apps?new_app=1
 
 以下のように入力して Create App します.
 
+```
 App Name: ResearchBot
 Development Slack Workspace: (ワークスペース)
-
+```
 
 左のメニューから,
 
@@ -42,18 +43,20 @@ chat:write
 左のメニューから,
 
 Features > App Home
+
 App Display Name > Edit
 
+```
 Display Name (Bot Name): ResearchBot
 Default username: researchbot
+```
 
 して Save を押します. その下の以下項目を ON にしておきます.
 
-
+```
 Always Show My Bot as Online: ON
-
 Show Tabs > Home Tab: ON
-
+```
 
 左のメニューから
 
@@ -61,7 +64,7 @@ Settings > Install App
 
 Install App to Workspace
 
-Allow を押します.
+`Allow` を押します.
 
 Bot User OAuth Access Token (`xoxb-nnn...`) をメモしておきます.
 
@@ -123,7 +126,7 @@ ngrok のアドレスをメモしておきます.
 
 ## Slack App の設定(後半)
 
-Slack App の画面に戻って,
+Slack App の画面に戻って, 左のメニューから,
 
 Features > Event Subscriptions
 
@@ -137,6 +140,7 @@ https://xxx.ngrok.io/slack/events
 
 Verified と表示されれば OK です.
 
+左のメニューから,
 
 Enable Events > Subscribe to bot events
 
@@ -147,7 +151,9 @@ message.groups
 
 を追加して `Save Changes` を押します.
 
-Slack の ResearchBot を招待したチャンネルで `https://arxiv.org/abs/2005.05960` と発言してみてボットの返答がスレッドでつけばローカル環境でのテストは完了です. ngrok と run.py を Ctrl-C で終了しておきます.
+Slack の ResearchBot を招待したチャンネルで `https://arxiv.org/abs/2005.05960` と発言してみてボットの返答がスレッドでつけばローカル環境でのテストは完了です.
+
+テストが終わったらngrok と run.py を Ctrl-C で終了しておきます.
 
 
 ## Heroku での設定
@@ -171,7 +177,7 @@ heroku login
 heroku create rl-colloquium-researchbot  # 任意のアプリ名を指定.
 git remote -v  # heroku が追加されているか確認
 heroku buildpacks:set heroku/python
-# Selenium と Chrome を使う場合は以下
+# Selenium と Chrome を使う場合は以下も
 # heroku buildpacks:set https://github.com/heroku/heroku-buildpack-chromedriver.git
 # heroku buildpacks:set https://github.com/heroku/heroku-buildpack-google-chrome.git
 ```
