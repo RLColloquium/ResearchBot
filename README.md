@@ -1,6 +1,6 @@
 # ResearchBot
 
-[Slack](https://slack.com/) で [arXiv](https://arxiv.org/) 等の URL を書くとタイトルやアブストラクト等を通知するボット.
+[Slack](https://slack.com/) で [arXiv](https://arxiv.org/) の URL を書くとタイトルやアブストラクト等を通知するボット.
 
 [DeepL API](https://www.deepl.com/docs-api/introduction/) での翻訳にも対応しています.
 
