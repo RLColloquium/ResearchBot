@@ -28,17 +28,15 @@ Development Slack Workspace: (ワークスペース)
 
 Features > OAuth & Permissions
 
-Scopes > Bot Token Scopes
+Scopes > Bot Token Scopes > Add an OAuth Scope
 
-の部分に
+で以下を追加します.
 
 ```
 channels:history
 groups:history
 chat:write
 ```
-
-を選択します.
 
 左のメニューから,
 
