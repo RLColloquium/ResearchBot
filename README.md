@@ -17,7 +17,7 @@ https://qiita.com/seratch/items/a001985ee1dccaf95727#slack-%E3%82%A2%E3%83%97%E3
 
 https://api.slack.com/apps?new_app=1
 
-以下のように入力して Create App します.
+以下のように入力して `Create App` します.
 
 ```
 App Name: ResearchBot
@@ -49,7 +49,7 @@ Display Name (Bot Name): ResearchBot
 Default username: researchbot
 ```
 
-して Save を押します. その下の以下項目を ON にしておきます.
+して `Save` を押します. その下の以下項目を ON にしておきます.
 
 ```
 Always Show My Bot as Online: ON
@@ -58,9 +58,7 @@ Show Tabs > Home Tab: ON
 
 左のメニューから
 
-Settings > Install App
-
-Install App to Workspace
+Settings > Install App > Install App to Workspace
 
 `Allow` を押します.
 
