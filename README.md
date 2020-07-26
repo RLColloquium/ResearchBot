@@ -184,7 +184,7 @@ Settings > Buildpacks > Add buildpack
 
 ```
 heroku/python
-# Selenium と Chrome を使う場合は以下も
+# Selenium と Chrome を使う場合は以下も. また, requirements.txt に selenium も追加.
 https://github.com/heroku/heroku-buildpack-chromedriver.git
 https://github.com/heroku/heroku-buildpack-google-chrome.git
 ```
