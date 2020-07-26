@@ -94,7 +94,7 @@ Slackの設定は一旦ここまでやっておいて, 後で残りの設定を�
 
 上記でメモした Slack App の API Token を環境変数 `SLACKBOT_API_TOKEN` に, Signing Secret を `SLACK_SIGNING_SECRET` に設定しておきます.
 
-ローカルでテストする場合は, 環境変数を ~/.zshrc に書いておきます.
+ローカルでテストする場合は, 環境変数を ~/.zshrc に書いておいて `source ~/.zshrc` しておきます.
 
 ```sh
 export SLACK_BOT_TOKEN="xoxb-nnn..."
