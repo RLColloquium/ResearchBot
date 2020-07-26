@@ -88,7 +88,7 @@ Slackの設定は一旦ここまでやっておいて, 後で残りの設定を�
 
 ## ローカルの環境の設定
 
-上記でメモした Slack App の API Token を環境変数 `SLACKBOT_API_TOKEN` に, Signing Secret を `SLACK_SIGNING_SECRET` に設定しておきます.
+上記でメモした Slack App の API Token を環境変数 `SLACK_BOT_TOKEN` に, Signing Secret を `SLACK_SIGNING_SECRET` に設定しておきます.
 
 ローカルでテストする場合は, 環境変数を ~/.zshrc に書いておいて `source ~/.zshrc` しておきます.
 
@@ -136,16 +136,16 @@ https://xxx.ngrok.io/slack/events
 
 Verified と表示されれば OK です.
 
-左のメニューから,
+すぐ下の,
 
-Enable Events > Subscribe to bot events
+Subscribe to bot events > Add Bot User Event
 
 ```
 message.channels
 message.groups
 ```
 
-を追加して `Save Changes` を押します.
+を追加して下の `Save Changes` を押します( **忘れがち** ).
 
 Slack の ResearchBot を招待したチャンネルで `https://arxiv.org/abs/2005.05960` と発言してみてボットの返答がスレッドでつけばローカル環境でのテストは完了です.
 
@@ -170,25 +170,29 @@ Heroku のアプリ作成を以下のようにします.
 
 ```sh
 heroku login
-heroku create rl-colloquium-researchbot  # 任意のアプリ名を指定.
+heroku create (任意のアプリ名)
 git remote -v  # heroku が追加されているか確認
-heroku buildpacks:set heroku/python
+```
+
+以下のページから, 作成したアプリ名をクリック,
+
+https://dashboard.heroku.com/apps
+
+Settings > Buildpacks > Add buildpack
+
+以下を追加して `Save changes` (1個ずつ).
+
+```
+heroku/python
 # Selenium と Chrome を使う場合は以下も
-# heroku buildpacks:set https://github.com/heroku/heroku-buildpack-chromedriver.git
-# heroku buildpacks:set https://github.com/heroku/heroku-buildpack-google-chrome.git
+https://github.com/heroku/heroku-buildpack-chromedriver.git
+https://github.com/heroku/heroku-buildpack-google-chrome.git
 ```
 
-### Heroku へのデプロイ
-
-Heroku へのデプロイは以下のようにします.
-
-```sh
-git push heroku master  # Heroku にコードをアップロード
-```
 
 ### Heroku 環境変数設定
 
-以前メモした Slack App の 設定を を環境変数 `SLACKBOT_API_TOKEN`, `SLACK_SIGNING_SECRET` で設定しておきます. DeepL API を使う場合は, 同様に `DEEPL_AUTH_KEY` も設定しておきます.
+以前メモした Slack App の 設定を環境変数 `SLACK_BOT_TOKEN`, `SLACK_SIGNING_SECRET` で設定しておきます. DeepL API を使う場合は, 同様に `DEEPL_AUTH_KEY` も設定しておきます.
 
 以下ページを参考に, Heroku 側での環境変数を設定します.
 
@@ -199,11 +203,13 @@ CLI のコマンドか Web で設定できますが, CLI だとシェルのヒ�
 https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard
 
 
-### Heroku アプリ起動
+### Heroku へのデプロイ
 
-以下ページを参考に, Heroku アプリを起動します.
+Heroku へのデプロイは以下のようにします.
 
-https://qiita.com/akabei/items/ec5179794f9e4e1df203#%E8%B5%B7%E5%8B%95
+```sh
+git push heroku master  # Heroku にコードをアップロード
+```
 
 
 ### Heroku ログ確認
@@ -213,6 +219,32 @@ https://qiita.com/akabei/items/ec5179794f9e4e1df203#%E8%B5%B7%E5%8B%95
 ```
 heroku logs --tail
 ```
+
+
+### Heroku アプリ起動
+
+ブラウザから以下のページにアクセスして `Hello!` と表示されれば Flask まで起動しています. ログでも確認しておきます.
+
+https://(任意のアプリ名).herokuapp.com/
+
+
+## Slack App の設定(本番用)
+
+Slack App の画面に戻って, 左のメニューから,
+
+Features > Event Subscriptions
+
+Enable Events > Request URL
+
+Heroku のアドレスの末尾に `/slack/events` を追加して入力します.
+
+```
+https://(任意のアプリ名).herokuapp.com/slack/events
+```
+
+Verified と表示されれば OK です. 下の `Save Changes` を押します( **忘れがち** ).
+
+Slack の ResearchBot を招待したチャンネルで `https://arxiv.org/abs/2005.05960` と発言してみてボットの返答がスレッドでつけば本番環境でのテストは完了です.
 
 
 ## 開発サイクル
@@ -233,6 +265,7 @@ git push heroku master # Heroku にアップロードされてコードが更新
 # Slack App の設定で Features > Event Subscriptions, Enable Events > Request URL を Heroku の URL に変更
 # Slack で動作確認
 ```
+
 
 ## 参考
 
