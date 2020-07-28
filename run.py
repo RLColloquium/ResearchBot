@@ -118,12 +118,7 @@ def is_user(e):
 
 def get_arxiv_id(text):
     m = re.search(r'https?://arxiv\.org/(abs|pdf)/([0-9]+\.[0-9v]+)(\.pdf)?', text)
-    if m and m.group(2):
-        return m.group(2)
-    #m = re.search(r'https?://arxiv\.org/pdf/([0-9v\.]+).pdf', text)
-    #if m and m.group(1):
-    #    return m.group(1)
-    return None
+    return m.group(2) if m and m.group(2) else None
 
 
 @slack_events_adapter.on('message')
