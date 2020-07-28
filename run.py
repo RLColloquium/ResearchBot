@@ -117,7 +117,7 @@ def is_user(e):
     return e.get('user') and e.get('bot_id') is None
 
 def get_arxiv_id(text):
-    m = re.search(r'https?://arxiv\.org/(abs|pdf)/([0-9v\.]+)(\.pdf)?', text)
+    m = re.search(r'https?://arxiv\.org/(abs|pdf)/([0-9]+\.[0-9v]+)(\.pdf)?', text)
     if m and m.group(2):
         return m.group(2)
     #m = re.search(r'https?://arxiv\.org/pdf/([0-9v\.]+).pdf', text)
@@ -156,4 +156,4 @@ def handle_error(err):
 
 if __name__ == '__main__':
     port = os.getenv('PORT') or 3000
-    app.run(port=port)
+    app.run(port=int(port))
