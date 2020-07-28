@@ -3,7 +3,6 @@ flask
 gunicorn
 slackclient
 slackeventsapi
-# selenium
 # numpy
 # pandas
 arxiv

@@ -182,13 +182,10 @@ https://dashboard.heroku.com/apps
 
 Settings > Buildpacks > Add buildpack
 
-以下を追加して `Save changes` (1個ずつ).
+以下を追加して `Save changes`.
 
 ```
 heroku/python
-# Selenium と Chrome を使う場合は以下も. また, requirements.txt に selenium も追加.
-https://github.com/heroku/heroku-buildpack-chromedriver.git
-https://github.com/heroku/heroku-buildpack-google-chrome.git
 ```
 
 
@@ -271,9 +268,10 @@ git push heroku master # Heroku にアップロードされてコードが更新
 
 ## 参考
 
-- https://devcenter.heroku.com/articles/getting-started-with-python
 - https://api.slack.com/bot-users
+- https://github.com/slackapi/python-slack-events-api
 - https://www.deepl.com/docs-api/introduction/
+- https://devcenter.heroku.com/articles/getting-started-with-python
 - https://qiita.com/seratch/items/a001985ee1dccaf95727
 - https://qiita.com/akabei/items/ec5179794f9e4e1df203
 - https://qiita.com/nsuhara/items/76ae132734b7e2b352dd
