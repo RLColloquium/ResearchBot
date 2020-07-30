@@ -275,6 +275,7 @@ git push heroku master # Heroku にアップロードされてコードが更新
 - https://qiita.com/seratch/items/a001985ee1dccaf95727
 - https://qiita.com/akabei/items/ec5179794f9e4e1df203
 - https://qiita.com/nsuhara/items/76ae132734b7e2b352dd
+- https://github.com/dev-hato/hato-bot/issues/146
 
 
 ## 作者
