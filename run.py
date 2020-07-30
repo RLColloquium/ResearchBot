@@ -19,6 +19,7 @@ import re
 import time
 import urllib
 from functools import lru_cache
+from concurrent.futures import ThreadPoolExecutor
 # from pprint import PrettyPrinter
 import requests
 from flask import Flask, request
@@ -79,7 +80,7 @@ def translate_deepl_api(text, auth_key, target_lang='JA'):
     if r.status_code == requests.codes.ok:
         j = r.json()
         # pp.pprint(j)
-        print('translate_deepl_api: {:.5f} sec'.format(time.time() - start))
+        print('translate_deepl_api: {:.6f} sec'.format(time.time() - start))
         return j['translations'][0]['text'] if 'translations' in j else None # TODO: need more check?
     else:
         print('Failed to translate: {}'.format(r.text))
@@ -120,17 +121,8 @@ def get_arxiv_id(text):
     m = re.search(r'https?://arxiv\.org/(abs|pdf)/([0-9]+\.[0-9v]+)(\.pdf)?', text)
     return m.group(2) if m and m.group(2) else None
 
-
-@slack_events_adapter.on('message')
-def handle_message(event):
-    if is_retry_request(request): # flask.request
-        # TODO: use asyncio or multithread or whatever to avoid retry events. it needs to respond "200 OK" within 3 seconds.
-        # print('Slack Events API retry event: ignored')
-        return
+def handle_arxiv_url(event):
     e = event['event']
-    if not is_user(e): # bot
-        # print('Bot message: ignored')
-        return
     arxiv_id = get_arxiv_id(e['text'])
     if arxiv_id is None: # not arXiv url
         # print('Not arXiv URL: ignored')
@@ -144,11 +136,32 @@ def handle_message(event):
         text = 'No result found: {}'.format(arxiv_id)
     slack_client.chat_postMessage(channel=e['channel'], text=text, thread_ts=e['ts'])
 
+
+@slack_events_adapter.on('message')
+def handle_message(event):
+    start = time.time()
+    if is_retry_request(request): # flask.request
+        # it needs to respond "200 OK" within 3 seconds.
+        print('retry event request')
+        # return
+    e = event['event']
+    if not is_user(e): # bot
+        # print('Bot message: ignored')
+        return
+    if get_arxiv_id(e['text']):
+        executor = ThreadPoolExecutor()
+        future = executor.submit(handle_arxiv_url, event) # non blocking
+        # print(future)
+        executor.shutdown(wait=False) # non blocking
+        print('handle_message: {:.6f} sec'.format(time.time() - start))
+        return
+    # print('No keyword: ignored')
+    return
+
 @slack_events_adapter.on('error')
 def handle_error(err):
     print('Error: {}'.format(str(err)))
 
 
 if __name__ == '__main__':
-    port = os.getenv('PORT') or 3000
-    app.run(port=int(port))
+    app.run(port=int(os.getenv('PORT') or 3000))
