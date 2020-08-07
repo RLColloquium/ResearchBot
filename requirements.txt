@@ -3,7 +3,7 @@ flask
 gunicorn
 slackclient
 slackeventsapi
-# numpy
-# pandas
+numpy
+pandas
 arxiv
-# tweepy
+tweepy
