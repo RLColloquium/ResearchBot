@@ -188,7 +188,7 @@ def str_to_list(s): # just a tiny hack to enable lru_cache for arxiv_query
     return json.loads(s)
 
 @lru_cache(maxsize=128)
-def arxiv_query(id_list_str='', q='', max_chunk_id_list=250): # list is unhashable, so it needs to convert from list to string to enable lru_cache
+def arxiv_query(id_list_str='', q='', max_chunk_id_list=200): # list is unhashable, so it needs to convert from list to string to enable lru_cache
     start = time.time()
     id_list = str_to_list(id_list_str)
     rs = []
@@ -216,7 +216,7 @@ def handle_popular_arxiv(e):
         return
     id_list = arxiv_id_counts.keys().tolist()
     q = 'cat:cs.CV OR cat:cs.AI OR cat:cs.LG OR cat:cs.CL OR cat:cs.NE OR cat:stat.ML'
-    rs = arxiv_query(id_list_str=list_to_str(id_list), q=q, max_chunk_id_list=250)
+    rs = arxiv_query(id_list_str=list_to_str(id_list), q=q, max_chunk_id_list=200)
     print(len(id_list), len(rs))
     if len(rs) < 1:
         text = 'No arXiv result found'
