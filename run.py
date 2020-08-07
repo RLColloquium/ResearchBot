@@ -48,9 +48,7 @@ slack_events_adapter = SlackEventAdapter(os.environ['SLACK_SIGNING_SECRET'], '/s
 slack_client = WebClient(os.environ['SLACK_BOT_TOKEN'])
 
 def get_twitter_api():
-    if os.getenv('TWITTER_API_KEY') and os.getenv('TWITTER_API_SECRET_KEY') and os.getenv('TWITTER_ACCESS_TOKEN') and os.getenv('TWITTER_ACCESS_TOKEN_SECRET'):
-        #auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET_KEY'])
-        #auth.set_access_token(os.environ['TWITTER_ACCESS_TOKEN'], os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
+    if os.getenv('TWITTER_API_KEY') and os.getenv('TWITTER_API_SECRET_KEY'):
         auth = tweepy.AppAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET_KEY'])
         return tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
     else:
