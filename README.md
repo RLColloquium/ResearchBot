@@ -266,6 +266,12 @@ git push heroku master # Heroku にアップロードされてコードが更新
 ```
 
 
+## TODO
+
+- app.json
+- Bolt for Python
+
+
 ## 参考
 
 - https://api.slack.com/bot-users
